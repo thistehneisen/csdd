@@ -63,14 +63,11 @@ for ($i = 65; $i <= 90; $i++) {
             foreach ($tableText as $i => $data) {
                 $fullData .= $data->innerHtml;
             }
-            
-            if (empty($fullData))
-                var_dump($response);
 
-            /*$db->insert('vehicle_numbers', [
+            $db->insert('vehicle_numbers', [
                 'vnz'               => $VNZ,
                 'data_original'     => $fullData
-            ]);*/
+            ]);
 
             unset($dom, $tableText, $fullData);
         }
