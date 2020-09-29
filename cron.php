@@ -2,6 +2,7 @@
 
 require_once 'init.php';
 use PHPHtmlParser\Dom;
+use PHPHtmlParser\Options;
 
 $curl = curl_init();
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
