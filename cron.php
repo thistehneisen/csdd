@@ -1,6 +1,6 @@
 <?php
 
-require_once 'library/constants.php';
+require_once 'init.php';
 
 $curl = curl_init();
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
