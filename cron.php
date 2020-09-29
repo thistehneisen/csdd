@@ -24,18 +24,21 @@ $body = substr($response, $header_size);
 
 preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $header, $matches);
 $cookies = array();
+
 foreach ($matches[1] as $item) {
     parse_str($item, $cookie);
     $cookies = array_merge($cookies, $cookie);
 }
+$cookies['userSawThatSiteUsesCookies'] = '1';
 
 var_dump($header);
 var_dump($body);
-var_dump($cookies);
+var_dump(join('; ', $cookies));
 
 if (1 === 1) {
     $curl       = curl_init();
     $params     = ['rn' => 'MK2248'];
+    
 
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_URL, E_CSDD . 'tadati/');
