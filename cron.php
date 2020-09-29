@@ -48,6 +48,10 @@ if (1 === 1) {
 
     $response = curl_exec($curl);
     $dom = new Dom;
+    $dom->setOptions(
+        (new Options())
+            ->cleanupInput(true)
+    );
     $dom->loadStr($response);
     $tableText = $dom->find('#refer-table');
 
