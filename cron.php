@@ -1,6 +1,7 @@
 <?php
 
 require_once 'init.php';
+use PHPHtmlParser\Dom;
 
 $curl = curl_init();
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -46,9 +47,12 @@ if (1 === 1) {
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 
     $response = curl_exec($curl);
+    $dom = new Dom;
+    $dom->loadStr($response);
+    $tableText = $dom->find('#refer-table');
 
     $db->insert('vehicle_numbers', [
         'vnz'               => 'MK2248',
-        'data_original'     => $response
+        'data_original'     => $tableText
     ]);
 }
