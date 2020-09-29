@@ -51,8 +51,12 @@ if (1 === 1) {
     $dom->loadStr($response);
     $tableText = $dom->find('#refer-table');
 
+    foreach ($tableText as $i => $data) {
+        $fullData .= $data->innerHtml;
+    }
+
     $db->insert('vehicle_numbers', [
         'vnz'               => 'MK2248',
-        'data_original'     => $tableText->outerHtml
+        'data_original'     => $fullData
     ]);
 }
