@@ -75,7 +75,8 @@ for ($i = 65; $i <= 90; $i++) {
 
             $db->insert('vehicle_numbers', [
                 'vnz'               => $VNZ,
-                'data_original'     => $fullData
+                'data'              => $fullData,
+                'response'          => $response
             ]);
 
             unset($dom, $tableText, $fullData, $sleepTime);
