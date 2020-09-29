@@ -52,6 +52,7 @@ for ($i = 65; $i <= 90; $i++) {
         for ($x=1; $x <= 9999; $x++) {
             $VNZ = $L1.$L2.$x;
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query(['rn' => $VNZ]));
+            sleep(1);
             $response = curl_exec($curl);
 
             $dom = new Dom;
@@ -62,11 +63,14 @@ for ($i = 65; $i <= 90; $i++) {
             foreach ($tableText as $i => $data) {
                 $fullData .= $data->innerHtml;
             }
-        
-            $db->insert('vehicle_numbers', [
+            
+            if (empty($fullData))
+                var_dump($response);
+
+            /*$db->insert('vehicle_numbers', [
                 'vnz'               => $VNZ,
                 'data_original'     => $fullData
-            ]);
+            ]);*/
 
             unset($dom, $tableText, $fullData);
         }
