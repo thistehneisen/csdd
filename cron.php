@@ -37,26 +37,25 @@ foreach ($cookies as $key => $val) {
     $cookieStr .= $key . '=' . $val . '; ';
 }
 
-for ($i=65; $i<=90; $i++) {
-    $L1=chr($i);
-    for ($j=65; $j<=90; $j++) {
-        $L2=chr($j);
-        for ($x=1; $x<=9999; $x++) {
+curl_close($curl);
+
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_URL, E_CSDD . 'tadati/');
+curl_setopt($curl, CURLOPT_POST, true);
+curl_setopt($curl, CURLOPT_HTTPHEADER, array('Cookie: ' . $cookieStr));
+for ($i = 65; $i <= 90; $i++) {
+    $L1 = chr($i);
+    for ($j = 65; $j <= 90; $j++) {
+        $L2 = chr($j);
+        for ($x=1; $x <= 9999; $x++) {
             $VNZ = $L1.$L2.$x;
-            $curl       = curl_init();
-            $params     = ['rn' => $VNZ];
-            
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_URL, E_CSDD . 'tadati/');
-            curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Cookie: ' . $cookieStr));
-            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
-        
+            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query(['rn' => $VNZ]));
             $response = curl_exec($curl);
 
             $dom = new Dom;
             $dom->loadStr($response);
-            
+
             $tableText = $dom->find('#refer-table');
         
             foreach ($tableText as $i => $data) {
@@ -67,6 +66,8 @@ for ($i=65; $i<=90; $i++) {
                 'vnz'               => $VNZ,
                 'data_original'     => $fullData
             ]);
+
+            unset($dom, $tableText, $fullData);
         }
     }
 }
