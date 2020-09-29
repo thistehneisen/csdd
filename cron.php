@@ -31,9 +31,9 @@ foreach ($matches[1] as $item) {
 }
 $cookies['userSawThatSiteUsesCookies'] = '1';
 
-var_dump($header);
-var_dump($body);
-var_dump(join('; ', $cookies));
+foreach ($cookies as $key => $val) {
+    $cookieStr .= $key . '=' . $val . '; ';
+}
 
 if (1 === 1) {
     $curl       = curl_init();
@@ -43,7 +43,7 @@ if (1 === 1) {
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_URL, E_CSDD . 'tadati/');
     curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Cookie: ' . join('; ', $cookies)));
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Cookie: ' . $cookieStr));
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 
     $response = curl_exec($curl);
