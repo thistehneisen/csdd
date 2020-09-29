@@ -39,7 +39,6 @@ if (1 === 1) {
     $curl       = curl_init();
     $params     = ['rn' => 'MK2248'];
     
-
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_URL, E_CSDD . 'tadati/');
     curl_setopt($curl, CURLOPT_POST, true);
@@ -47,5 +46,9 @@ if (1 === 1) {
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 
     $response = curl_exec($curl);
-    var_dump($response);
+
+    $db->insert('vehicle_numbers', [
+        'vnz'               => 'MK2248',
+        'data_original'     => $response
+    ]);
 }

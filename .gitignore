@@ -1,1 +1,4 @@
 library/credentials.php
+composer.phar
+composer.lock
+vendor/*
