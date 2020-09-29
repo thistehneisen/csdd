@@ -50,10 +50,19 @@ for ($i = 65; $i <= 90; $i++) {
     for ($j = 65; $j <= 90; $j++) {
         $L2 = chr($j);
         for ($x=1; $x <= 9999; $x++) {
+            $sleepTime = 3;
             $VNZ = $L1.$L2.$x;
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query(['rn' => $VNZ]));
-            usleep(510000);
+
+            retry_vnz:
+            $sleepTime++;
             $response = curl_exec($curl);
+
+            if (strpos($response, 'Aizdomas par robota') !== false) {
+                echo 'ROBOOOOT'.PHP_EOL;
+                sleep($sleepTime);
+                goto retry_vnz;
+            }
 
             $dom = new Dom;
             $dom->loadStr($response);
@@ -69,7 +78,7 @@ for ($i = 65; $i <= 90; $i++) {
                 'data_original'     => $fullData
             ]);
 
-            unset($dom, $tableText, $fullData);
+            unset($dom, $tableText, $fullData, $sleepTime);
         }
     }
 }
