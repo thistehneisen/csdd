@@ -53,6 +53,6 @@ if (1 === 1) {
 
     $db->insert('vehicle_numbers', [
         'vnz'               => 'MK2248',
-        'data_original'     => $tableText
+        'data_original'     => $tableText->text
     ]);
 }
