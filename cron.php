@@ -43,6 +43,7 @@ $curl = curl_init();
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_URL, E_CSDD . 'tadati/');
 curl_setopt($curl, CURLOPT_POST, true);
+curl_setopt($curl, CURLOPT_FORBID_REUSE, true);
 curl_setopt($curl, CURLOPT_HTTPHEADER, array('Cookie: ' . $cookieStr));
 for ($i = 65; $i <= 90; $i++) {
     $L1 = chr($i);
