@@ -33,14 +33,14 @@ var_dump($header);
 var_dump($body);
 var_dump($cookies);
 
-if (1 === 2) {
+if (1 === 1) {
     $curl       = curl_init();
     $params     = ['rn' => 'MK2248'];
 
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_URL, E_CSDD . 'tadati/');
     curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array("Cookie: test=cookie"));
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Cookie: ' . join('; ', $cookies)));
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 
     $response = curl_exec($curl);
