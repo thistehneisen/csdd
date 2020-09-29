@@ -50,6 +50,7 @@ if (1 === 1) {
     $dom = new Dom;
     $dom->loadStr($response);
     $tableText = $dom->find('#refer-table');
+    var_dump($tableText);
 
     $db->insert('vehicle_numbers', [
         'vnz'               => 'MK2248',
