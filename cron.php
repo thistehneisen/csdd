@@ -52,7 +52,7 @@ for ($i = 65; $i <= 90; $i++) {
         for ($x=1; $x <= 9999; $x++) {
             $VNZ = $L1.$L2.$x;
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query(['rn' => $VNZ]));
-            usleep(250000);
+            usleep(510000);
             $response = curl_exec($curl);
 
             $dom = new Dom;
